@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="layer.cpp" />
+    <ClCompile Include="layerexception.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="nnetwork.cpp" />
+    <ClCompile Include="output\outputlayer.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\outputlayerconfig.cpp">
+      <Filter>output</Filter>
+    </ClCompile>
+    <ClCompile Include="input\inputlayerconfig.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="fullyconnected\fullyconnectedlayer.cpp">
+      <Filter>fullyconnected</Filter>
+    </ClCompile>
+    <ClCompile Include="fullyconnected\fullyconnectedlayerconfig.cpp">
+      <Filter>fullyconnected</Filter>
+    </ClCompile>
+    <ClCompile Include="relu\relulayer.cpp">
+      <Filter>relu</Filter>
+    </ClCompile>
+    <ClCompile Include="relu\relulayerconfig.cpp">
+      <Filter>relu</Filter>
+    </ClCompile>
+    <ClCompile Include="pool\poollayer.cpp">
+      <Filter>pool</Filter>
+    </ClCompile>
+    <ClCompile Include="pool\poollayerconfig.cpp">
+      <Filter>pool</Filter>
+    </ClCompile>
+    <ClCompile Include="input\inputlayer.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="conv\convlayer.cpp">
+      <Filter>conv</Filter>
+    </ClCompile>
+    <ClCompile Include="conv\convlayerconfig.cpp">
+      <Filter>conv</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="layer.h" />
+    <ClInclude Include="innetworklayer.h" />
+    <ClInclude Include="layerexception.h" />
+    <ClInclude Include="nnetwork.h" />
+    <ClInclude Include="output\outputlayer.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\outputlayerconfig.h">
+      <Filter>output</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputlayer.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\inputlayerconfig.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="fullyconnected\fullyconnectedlayer.h">
+      <Filter>fullyconnected</Filter>
+    </ClInclude>
+    <ClInclude Include="fullyconnected\fullyconnectedlayerconfig.h">
+      <Filter>fullyconnected</Filter>
+    </ClInclude>
+    <ClInclude Include="relu\relulayer.h">
+      <Filter>relu</Filter>
+    </ClInclude>
+    <ClInclude Include="relu\relulayerconfig.h">
+      <Filter>relu</Filter>
+    </ClInclude>
+    <ClInclude Include="pool\poollayer.h">
+      <Filter>pool</Filter>
+    </ClInclude>
+    <ClInclude Include="pool\poollayerconfig.h">
+      <Filter>pool</Filter>
+    </ClInclude>
+    <ClInclude Include="conv\convlayer.h">
+      <Filter>conv</Filter>
+    </ClInclude>
+    <ClInclude Include="conv\convlayerconfig.h">
+      <Filter>conv</Filter>
+    </ClInclude>
+    <ClInclude Include="layertype.h" />
+    <ClInclude Include="layersize.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="fullyconnected">
+      <UniqueIdentifier>{e14eec04-3e53-4e64-b7cc-fa5735d12aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{17378fb3-e133-4638-9abc-d2dadff6b0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="output">
+      <UniqueIdentifier>{ca4d434e-c906-4152-a358-6e0f120030e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="relu">
+      <UniqueIdentifier>{ceb5c573-586a-4bfe-9317-54ce5b3c4274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pool">
+      <UniqueIdentifier>{2b63a404-082a-4f06-af64-5bce88ebf806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="conv">
+      <UniqueIdentifier>{bc203089-141c-4f8c-a829-c4997f844fec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="fullyconnected\fullyconnectedlayer.cu">
+      <Filter>fullyconnected</Filter>
+    </CudaCompile>
+    <CudaCompile Include="relu\relulayer.cu">
+      <Filter>relu</Filter>
+    </CudaCompile>
+    <CudaCompile Include="pool\poollayer.cu">
+      <Filter>pool</Filter>
+    </CudaCompile>
+    <CudaCompile Include="conv\convlayer.cu">
+      <Filter>conv</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>
