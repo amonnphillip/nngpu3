@@ -43,5 +43,6 @@ public:
 	int GetWeightCount();
 	FullyConnectedNode* GetNodeMem();
 	virtual LayerType GetLayerType();
+	void DebugPrint();
 };
 

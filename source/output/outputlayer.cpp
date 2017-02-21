@@ -1,8 +1,10 @@
+#include <cassert>
+#include <iostream>
 #include "outputlayer.h"
 #include "layerexception.h"
 #include "cuda_runtime.h"
 #include "layer.h"
-#include <cassert>
+
 
 OutputLayer::OutputLayer(OutputLayerConfig* config, INNetworkLayer* previousLayer)
 {
@@ -106,4 +108,23 @@ int OutputLayer::GetDepth()
 LayerType OutputLayer::GetLayerType()
 {
 	return Layer::GetLayerType();
+}
+
+void OutputLayer::DebugPrint(double* expected, int expectedCount)
+{
+	assert(expectedCount == GetForwardNodeCount());
+
+	double* forward = GetForwardHostMem();
+	int forwardCount = GetForwardNodeCount();
+	std::cout << "output:\r\n";
+	for (int index = 0; index < forwardCount; index++)
+	{
+		std::cout << forward[index] << " ";
+	}
+	std::cout << "\r\n";
+	std::cout << "expected:\r\n";
+	for (int index = 0; index < forwardCount; index++)
+	{
+		std::cout << expected[index] << " ";
+	}
 }

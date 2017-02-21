@@ -31,4 +31,5 @@ public:
 	virtual int GetHeight();
 	virtual int GetDepth();
 	virtual LayerType GetLayerType();
+	void DebugPrint(double* expected, int expectedCount);
 };

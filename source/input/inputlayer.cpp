@@ -1,7 +1,8 @@
+#include <cassert>
+#include <iostream>
 #include "inputlayerconfig.h"
 #include "inputlayer.h"
 #include "layerexception.h"
-#include <cassert>
 #include "cuda_runtime.h"
 #include "layer.h"
 
@@ -100,4 +101,16 @@ int InputLayer::GetDepth()
 LayerType InputLayer::GetLayerType()
 {
 	return Layer::GetLayerType();
+}
+
+void InputLayer::DebugPrint()
+{
+	double* forward = GetForwardHostMem();
+	int forwardCount = GetForwardNodeCount();
+
+	std::cout << "input:\r\n";
+	for (int index = 0; index < forwardCount; index++)
+	{
+		std::cout << forward[index] << " ";
+	}
 }

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "cuda_runtime.h"
 #include "nnetwork.h"
 #include "inputlayer.h"
@@ -7,62 +8,6 @@
 #include "poollayer.h"
 #include "convlayer.h"
 #include "outputlayer.h"
-#include <iostream>
-
-void DebugPrintFullyConnectedLayer(FullyConnectedLayer* fullyConnectedLayer)
-{
-	int nodeCount = fullyConnectedLayer->GetForwardNodeCount();
-	int weightCount = fullyConnectedLayer->GetWeightCount();
-
-	std::cout << "fully connected layer:\r\n";
-
-	std::cout << "weights:\r\n";
-	for (int index = 0; index < nodeCount; index++)
-	{
-		double* weight = fullyConnectedLayer->GetWeightsForNode(index);
-
-		for (int weightIndex = 0; weightIndex < weightCount; weightIndex++)
-		{
-			if (weightIndex + 1 != weightCount)
-			{
-				std::cout << *weight << " ";
-			}
-			else
-			{
-				std::cout << *weight << " : ";
-			}
-			weight++;
-		}
-	}
-
-	std::cout << "\r\n";
-	std::cout << "bias:\r\n";
-	FullyConnectedNode* node = fullyConnectedLayer->GetNodeMem();
-	for (int index = 0; index < nodeCount; index++)
-	{
-		if (index + 1 != nodeCount)
-		{
-			std::cout << node->bias << " ";
-		}
-		else
-		{
-			std::cout << node->bias << " ";
-		}
-		node++;
-	}
-
-	std::cout << "\r\n";
-
-	std::cout << "forward:\r\n";
-	double* output = fullyConnectedLayer->GetForwardHostMem();
-	for (int index = 0; index < nodeCount; index++)
-	{
-		std::cout << *output << " ";
-		output++;
-	}
-
-	std::cout << "\r\n\r\n";
-}
 
 int main()
 {
@@ -82,7 +27,7 @@ int main()
 
 	// Train the network
 	int iterationCount = 0;
-	int interationMax = 3000;
+	int interationMax = 700;
 	while (iterationCount < interationMax)
 	{
 		const int inputCount = 64;
@@ -130,6 +75,7 @@ int main()
 		nn->Backward(expected, expectedCount, 0.01);
 
 
+		// Display some layers in the console
 		std::cout << "iteration: " << iterationCount << "\r\n";
 		for (int layerIndex = 0; layerIndex < nn->GetLayerCount(); layerIndex++)
 		{
@@ -137,39 +83,23 @@ int main()
 			LayerType layerType = layer->GetLayerType();
 			if (layerType == LayerType::Input)
 			{
-				double* forward = layer->GetForwardHostMem();
-				int forwardCount = layer->GetForwardNodeCount();
-				std::cout << "input:\r\n";
-				for (int index = 0; index < forwardCount; index++)
-				{
-					std::cout << forward[index] << " ";
-				}
+				InputLayer* prntLayer = dynamic_cast<InputLayer*>(layer);
+				prntLayer->DebugPrint();
 			}
 			else if (layerType == LayerType::Convolution)
 			{
-				ConvLayer* convLayer = dynamic_cast<ConvLayer*>(layer);
-				convLayer->DebugPrint();
+				ConvLayer* prntLayer = dynamic_cast<ConvLayer*>(layer);
+				prntLayer->DebugPrint();
 			}
 			else if (layerType == LayerType::FullyConnected)
 			{
-				FullyConnectedLayer* fullyConnectedLayer = dynamic_cast<FullyConnectedLayer*>(layer);
-				DebugPrintFullyConnectedLayer(fullyConnectedLayer);
+				FullyConnectedLayer* prntLayer = dynamic_cast<FullyConnectedLayer*>(layer);
+				prntLayer->DebugPrint();
 			}
 			else if (layerType == LayerType::Output)
 			{
-				double* forward = layer->GetForwardHostMem();
-				int forwardCount = layer->GetForwardNodeCount();
-				std::cout << "output:\r\n";
-				for (int index = 0; index < forwardCount; index++)
-				{
-					std::cout << forward[index] << " ";
-				}
-				std::cout << "\r\n";
-				std::cout << "expected:\r\n";
-				for (int index = 0; index < forwardCount; index++)
-				{
-					std::cout << expected[index] << " ";
-				}
+				OutputLayer* prntLayer = dynamic_cast<OutputLayer*>(layer);
+				prntLayer->DebugPrint(expected, expectedCount);
 			}
 
 			std::cout << "\r\n";

@@ -1,6 +1,7 @@
+#include <cassert>
+#include <iostream>
 #include "fullyconnectedlayer.h"
 #include "layerexception.h"
-#include <cassert>
 
 extern void FullyConnectedLayer_Forward(FullyConnectedNode *node, double* weights, int weightCount, double *input, double *output, int nodeCount);
 extern void FullyConnectedLayer_Backward(FullyConnectedNode *node, double* weights, int weightCount, double *forward, double *previousLayerForward, double* nextlayerBackward, double *output, int nodeCount, double learnRate);
@@ -190,4 +191,59 @@ LayerType FullyConnectedLayer::GetLayerType()
 FullyConnectedNode* FullyConnectedLayer::GetNodeMem()
 {
 	return nodeHostMem.get();
+}
+
+void FullyConnectedLayer::DebugPrint()
+{
+	int nodeCount = GetForwardNodeCount();
+	int weightCount = GetWeightCount();
+
+	std::cout << "fully connected layer:\r\n";
+
+	std::cout << "weights:\r\n";
+	for (int index = 0; index < nodeCount; index++)
+	{
+		double* weight = GetWeightsForNode(index);
+
+		for (int weightIndex = 0; weightIndex < weightCount; weightIndex++)
+		{
+			if (weightIndex + 1 != weightCount)
+			{
+				std::cout << *weight << " ";
+			}
+			else
+			{
+				std::cout << *weight << " : ";
+			}
+			weight++;
+		}
+	}
+
+	std::cout << "\r\n";
+	std::cout << "bias:\r\n";
+	FullyConnectedNode* node = GetNodeMem();
+	for (int index = 0; index < nodeCount; index++)
+	{
+		if (index + 1 != nodeCount)
+		{
+			std::cout << node->bias << " ";
+		}
+		else
+		{
+			std::cout << node->bias << " ";
+		}
+		node++;
+	}
+
+	std::cout << "\r\n";
+
+	std::cout << "forward:\r\n";
+	double* output = GetForwardHostMem();
+	for (int index = 0; index < nodeCount; index++)
+	{
+		std::cout << *output << " ";
+		output++;
+	}
+
+	std::cout << "\r\n\r\n";
 }

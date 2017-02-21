@@ -49,5 +49,5 @@ public:
 	virtual int GetHeight();
 	virtual int GetDepth();
 	virtual LayerType GetLayerType();
-	void ConvLayer::DebugPrint();
+	void DebugPrint();
 };
